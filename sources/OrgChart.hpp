@@ -108,9 +108,12 @@ namespace ariel{
             for(unsigned int i = 0; i < this->nodes.size(); i++){
                 cout << this->nodes.at(i)->job << " ";
             }
+            this->currNode = *this->nodes.begin();
             cout << endl;
         }
         void iter_end_level_order(Node *node){
+            iter_begin_level_order(node);
+            this->currNode = *this->nodes.end();
 
         }
 
@@ -129,6 +132,7 @@ namespace ariel{
                     }
                     for(int i = tmp->subs.size() - 1; i >= 0; i--){
                         if(tmp->subs.size() >= 0){
+                            cout << "tmp = " << tmp->job << endl;
                             unsigned int ii = (unsigned int)(i);
                             nodeStack.push(tmp->subs.at(ii));
                         }
@@ -144,6 +148,7 @@ namespace ariel{
             for(unsigned int i = 0; i < this->nodes.size(); i++){
                 cout << this->nodes.at(i)->job << " ";
             }
+            this->currNode = *this->nodes.begin();
             cout << endl;
         }
         
