@@ -66,23 +66,31 @@ namespace ariel{
         Node* currNode;
         public:
         iterator(Node* node , const string &way){
-            // this->currNode = node;
-            // if(node != nullptr){
-            //     nodes.push_back(node);
-            // }
+            if(node != nullptr && way != "begin_reverse_order"){
+                this->nodes.push_back(node);
+            }
             if(way == "begin_level_order"){
                 iter_begin_level_order(node);
             }
             if(way == "begin_reverse_order"){
+                iter_begin_reverse_order(node);
 
             }
             if(way == "begin_preorder"){
 
             }
+            if(way == "end_level_order"){
+
+            }
+            if(way == "reverse_order"){
+
+            }
+            if(way == "end_preorder"){
+
+            }
         }
 
         void iter_begin_level_order(Node *node){
-            cout << "got here" << endl;
             std::queue<Node*> helper; 
             helper.push(node);
             while(!helper.empty()){
@@ -94,10 +102,50 @@ namespace ariel{
                         helper.push(tmp->subs.at(i));
                         this->nodes.push_back(tmp->subs.at(i));
                     }
+                    times--;
                 }
             }
+            for(unsigned int i = 0; i < this->nodes.size(); i++){
+                cout << this->nodes.at(i)->job << " ";
+            }
+            cout << endl;
+        }
+        void iter_end_level_order(Node *node){
+
         }
 
+        void iter_begin_reverse_order(Node *node){
+            std::queue<Node*> helper; 
+            std::stack<Node*> nodeStack;
+            helper.push(node);
+            nodeStack.push(node);
+            while(!helper.empty()){
+                int times = helper.size();
+                while(times > 0){
+                    Node* tmp = helper.front();
+                    helper.pop();
+                    for(unsigned int i = 0; i < tmp->subs.size(); i++){
+                        helper.push(tmp->subs.at(i));
+                    }
+                    for(int i = tmp->subs.size() - 1; i >= 0; i--){
+                        if(tmp->subs.size() >= 0){
+                            unsigned int ii = (unsigned int)(i);
+                            nodeStack.push(tmp->subs.at(ii));
+                        }
+                    }
+                    times--;
+                }
+            }
+            while(!nodeStack.empty()){
+                Node *top = nodeStack.top();
+                nodeStack.pop();
+                this->nodes.push_back(top);
+            }
+            for(unsigned int i = 0; i < this->nodes.size(); i++){
+                cout << this->nodes.at(i)->job << " ";
+            }
+            cout << endl;
+        }
         
         string* operator->(){
             return &this->currNode->job;
@@ -106,29 +154,33 @@ namespace ariel{
             return false;
         }
         string operator*(){
-             return "orgchart-a";
+             return currNode->job;
         }
-        iterator operator++(){
+        iterator &operator++(){
+            if(this->nodes.size() > 0){
+                this->nodes.erase(this->nodes.begin());
+                this->currNode = nodes.at(0);
+            }
             return *this;
         }
     };
 
-    iterator begin_level_order()const{
+    iterator begin_level_order(){
         return iterator(root , "begin_level_order");
     }
-    static iterator end_level_order(){
+    iterator end_level_order(){
         return iterator(nullptr , "end_level_order");
     }
-    iterator begin_reverse_order()const{
+    iterator begin_reverse_order(){
         return iterator(root , "begin_reverse_order");
     }
-    static iterator reverse_order(){
+    iterator reverse_order(){
         return iterator(nullptr , "reverse_order");
     }
-    iterator begin_preorder()const{
+    iterator begin_preorder(){
         return iterator(root , "begin_preorder");
     }
-    static iterator end_preorder(){
+    iterator end_preorder(){
         return iterator(nullptr , "end_preorder");
     }
     };
