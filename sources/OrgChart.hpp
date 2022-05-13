@@ -66,9 +66,6 @@ namespace ariel{
         Node* currNode;
         public:
         iterator(Node* node , const string &way){
-            if(node != nullptr && way != "begin_reverse_order"){
-                this->nodes.push_back(node);
-            }
             if(way == "begin_level_order"){
                 iter_begin_level_order(node);
             }
@@ -77,6 +74,7 @@ namespace ariel{
 
             }
             if(way == "begin_preorder"){
+                iter_begin_preorder(node);
 
             }
             if(way == "end_level_order"){
@@ -93,6 +91,7 @@ namespace ariel{
         void iter_begin_level_order(Node *node){
             std::queue<Node*> helper; 
             helper.push(node);
+            this->nodes.push_back(node);
             while(!helper.empty()){
                 int times = helper.size();
                 while(times > 0){
@@ -152,6 +151,30 @@ namespace ariel{
                 cout << this->nodes.at(i)->job << " ";
             }
             this->currNode = *this->nodes.begin();
+            cout << endl;
+        }
+        void iter_begin_preorder(Node* node){
+            if(node == nullptr){
+                return;
+            }
+            std::stack<Node*> nodeStack;
+            nodeStack.push(node);
+            while(!nodeStack.empty()){
+                Node* tmp = nodeStack.top();
+                // cout << tmp->job << endl;
+                this->nodes.push_back(tmp);
+                nodeStack.pop();
+                for(int i = tmp->subs.size() - 1; i >= 0; i--){
+                    if(tmp->subs.size() >= 0){
+                        unsigned int ii = (unsigned int)(i);
+
+                        nodeStack.push(tmp->subs.at(ii));
+                    }
+                }
+            }
+            for(unsigned int i = 0; i < this->nodes.size(); i++){
+                    cout << this->nodes.at(i)->job << " ";
+            }
             cout << endl;
         }
         
