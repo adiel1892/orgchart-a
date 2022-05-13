@@ -127,12 +127,15 @@ namespace ariel{
                 while(times > 0){
                     Node* tmp = helper.front();
                     helper.pop();
-                    for(unsigned int i = 0; i < tmp->subs.size(); i++){
-                        helper.push(tmp->subs.at(i));
+                    for(int i = tmp->subs.size() - 1; i >= 0; i--){
+                        if(tmp->subs.size() >= 0){
+                            unsigned int ii = (unsigned int)(i);
+                            helper.push(tmp->subs.at(ii));
+                        }
+                        // helper.push(tmp->subs.at(i));
                     }
                     for(int i = tmp->subs.size() - 1; i >= 0; i--){
                         if(tmp->subs.size() >= 0){
-                            cout << "tmp = " << tmp->job << endl;
                             unsigned int ii = (unsigned int)(i);
                             nodeStack.push(tmp->subs.at(ii));
                         }
@@ -155,12 +158,20 @@ namespace ariel{
         string* operator->(){
             return &this->currNode->job;
         }
+        // bool operator==(const iterator &other){
+        //     if(this->currNode == nullptr || other.currNode == nullptr){
+        //         return this->currNode == other.currNode;
+        //     }
+        //     return this->currNode->job == other.currNode->job;
+        // }
+
         bool operator!=(const iterator &other){
             return false;
         }
         string operator*(){
              return currNode->job;
         }
+        
         iterator &operator++(){
             if(this->nodes.size() > 0){
                 this->nodes.erase(this->nodes.begin());
