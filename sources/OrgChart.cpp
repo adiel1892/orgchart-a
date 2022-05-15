@@ -175,3 +175,9 @@ OrgChart::iterator OrgChart::begin_preorder(){
 OrgChart::iterator OrgChart::end_preorder(){
     return OrgChart::iterator(nullptr , "null");
 }
+OrgChart::iterator OrgChart::begin(){
+    return OrgChart::iterator(root , "preorder");
+}
+OrgChart::iterator OrgChart::end(){
+    return OrgChart::iterator(nullptr , "null");
+}
