@@ -53,20 +53,6 @@ Node* OrgChart::searchNode(const string & job){
 }
 
 ostream& ariel::operator<<(ostream& out , const OrgChart &org){
-    // iterator a = iterator(org.root , "begin_level_order");
-    // if(a.getNodes().size() == 0){
-    //     return out;
-    // }
-    // unsigned int printer = 0;
-    // for(unsigned int i = 0; i < a.getNodes().size(); i++){
-    //     out << a.getNodes().at(i + printer)->job << " ";
-    //     out << endl << "|" << endl;
-    //     for(unsigned j = 0; j < a.getNodes().at(i)->subs.size(); j++){
-    //         out << a.getNodes().at(i)->subs.at(j)->job << "--";
-    //         printer++;
-    //     }
-    //     out << endl;
-    // }
     return out;
 }
 
@@ -100,11 +86,6 @@ void OrgChart::iterator::iter_begin_level_order(Node* node){
             times--;
         }
     }
-    for(unsigned int i = 0; i < this->nodes.size(); i++){
-        cout << this->nodes.at(i)->job << " ";
-    }
-    this->currNode = *this->nodes.begin();
-    cout << endl;
 }
 
 void OrgChart::iterator::iter_begin_reverse_order(Node* node){
@@ -122,7 +103,6 @@ void OrgChart::iterator::iter_begin_reverse_order(Node* node){
                     unsigned int ii = (unsigned int)(i);
                     helper.push(tmp->subs.at(ii));
                 }
-            // helper.push(tmp->subs.at(i));
             }
             for(int i = tmp->subs.size() - 1; i >= 0; i--){
                 if(tmp->subs.size() >= 0){
@@ -138,12 +118,6 @@ void OrgChart::iterator::iter_begin_reverse_order(Node* node){
         nodeStack.pop();
         this->nodes.push_back(top);
     }
-            for(unsigned int i = 0; i < this->nodes.size(); i++){
-                cout << this->nodes.at(i)->job << " ";
-            }
-            this->currNode = *this->nodes.begin();
-            cout << endl;
-        
 }
 
 void OrgChart::iterator::iter_begin_preorder(Node* node){
@@ -164,16 +138,7 @@ void OrgChart::iterator::iter_begin_preorder(Node* node){
             }
         }
     }
-     for(unsigned int i = 0; i < this->nodes.size(); i++){
-                cout << this->nodes.at(i)->job << " ";
-            }
-            this->currNode = *this->nodes.begin();
-            cout << endl;
 }
-// bool OrgChart::iterator::operator==(const iterator &other){
-
-
-// }
 
 string* OrgChart::iterator::operator->(){
     return &this->currNode->job;
@@ -192,11 +157,6 @@ OrgChart::iterator & OrgChart::iterator::operator++(){
     }
     return *this;
 }
-// OrgChart::iterator OrgChart::iterator::operator(int){
-//     OrgChart::iterator it = *this;
-//     ++*this;
-//     return it;
-// }
 OrgChart::iterator OrgChart::begin_level_order(){
     return OrgChart::iterator(root , "level");
 }

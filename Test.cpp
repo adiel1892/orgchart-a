@@ -49,19 +49,16 @@ TEST_CASE("test_1"){
     // check not printing node twice
     vector<Node*> vec_begin = org.begin_level_order().getNodes();
     for(unsigned int i = 0; i < vec_begin.size() - 1; i++){
-        cout << vec_begin.at(i)->job << " -- ";
         CHECK(vec_begin.at(i) != vec_begin.at(i + 1));
     }
 
     vector<Node*> vec_reverse = org.begin_reverse_order().getNodes();
     for(unsigned int i = 0; i < vec_reverse.size() - 1; i++){
-        cout << vec_reverse.at(i)->job << " -- ";
         CHECK(vec_reverse.at(i) != vec_reverse.at(i + 1));
     }
 
     vector<Node*> vec_pre = org.begin_preorder().getNodes();
     for(unsigned int i = 0; i < vec_pre.size() - 1; i++){
-        cout << vec_pre.at(i)->job << " -- ";
         CHECK(vec_pre.at(i) != vec_pre.at(i + 1));
     }
     

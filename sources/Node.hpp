@@ -1,10 +1,11 @@
 #include <string>
 #include <vector>
+using namespace std;
 class Node{
     public:
-    std::string job;
-    std::vector<Node*> subs;
-    Node(const std::string & job){
+    string job;
+    vector<Node*> subs;
+    Node(const string & job){
         this->job = job;
     }
     ~Node(){
