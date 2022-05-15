@@ -100,11 +100,11 @@ void OrgChart::iterator::iter_begin_level_order(Node* node){
             times--;
         }
     }
-    // for(unsigned int i = 0; i < this->nodes.size(); i++){
-    //     cout << this->nodes.at(i)->job << " ";
-    // }
-    // this->currNode = *this->nodes.begin();
-    // cout << endl;
+    for(unsigned int i = 0; i < this->nodes.size(); i++){
+        cout << this->nodes.at(i)->job << " ";
+    }
+    this->currNode = *this->nodes.begin();
+    cout << endl;
 }
 
 void OrgChart::iterator::iter_begin_reverse_order(Node* node){
@@ -138,11 +138,11 @@ void OrgChart::iterator::iter_begin_reverse_order(Node* node){
         nodeStack.pop();
         this->nodes.push_back(top);
     }
-            // for(unsigned int i = 0; i < this->nodes.size(); i++){
-            //     cout << this->nodes.at(i)->job << " ";
-            // }
-            // this->currNode = *this->nodes.begin();
-            // cout << endl;
+            for(unsigned int i = 0; i < this->nodes.size(); i++){
+                cout << this->nodes.at(i)->job << " ";
+            }
+            this->currNode = *this->nodes.begin();
+            cout << endl;
         
 }
 
@@ -164,12 +164,22 @@ void OrgChart::iterator::iter_begin_preorder(Node* node){
             }
         }
     }
+     for(unsigned int i = 0; i < this->nodes.size(); i++){
+                cout << this->nodes.at(i)->job << " ";
+            }
+            this->currNode = *this->nodes.begin();
+            cout << endl;
 }
+// bool OrgChart::iterator::operator==(const iterator &other){
+
+
+// }
 
 string* OrgChart::iterator::operator->(){
     return &this->currNode->job;
 }
 bool OrgChart::iterator::operator!=(const iterator &other){
+    // return false;
     return false;
 }
 string OrgChart::iterator::operator*(){
@@ -182,6 +192,11 @@ OrgChart::iterator & OrgChart::iterator::operator++(){
     }
     return *this;
 }
+// OrgChart::iterator OrgChart::iterator::operator(int){
+//     OrgChart::iterator it = *this;
+//     ++*this;
+//     return it;
+// }
 OrgChart::iterator OrgChart::begin_level_order(){
     return OrgChart::iterator(root , "level");
 }

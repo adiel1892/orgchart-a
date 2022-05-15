@@ -26,10 +26,11 @@ namespace ariel{
         void iter_begin_preorder(Node* node);
         vector<Node*> getNodes();
         string* operator->();
-        // bool operator==(const iterator &other)
+        // bool operator==(const iterator &other);
         bool operator!=(const iterator &other);
         string operator*();
         iterator &operator++();
+        // iterator operator++(int);
     };
     iterator begin_level_order();
     iterator end_level_order();
