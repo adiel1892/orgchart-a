@@ -1,6 +1,6 @@
 #!make -f
 
-CXX=clang++
+CXX=clang++-9
 CXXVERSION=c++2a
 SOURCE_PATH=sources
 OBJECT_PATH=objects
